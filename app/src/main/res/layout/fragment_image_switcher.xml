@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context="com.example.sunchaser.app.activity.ImageViewPagerFragment"
+    >
+
+    <ImageSwitcher
+        android:id="@+id/image_switcher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" >
+    </ImageSwitcher>
+
+    <ProgressBar
+        android:id="@+id/image_switcher_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:elevation="16dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+    />
+
+    <ImageView
+        android:id="@+id/image_switcher_previous"
+        android:layout_width="32dip"
+        android:layout_height="32dip"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="16dp"
+        android:elevation="16dp"
+        android:src="@drawable/ic_action_previous_item"
+        android:background="@drawable/circle_button_background"
+        android:visibility="gone"
+        />
+
+    <ImageView
+        android:id="@+id/image_switcher_next"
+        android:layout_width="32dip"
+        android:layout_height="32dip"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="16dp"
+        android:elevation="16dp"
+        android:src="@drawable/ic_action_next_item"
+        android:background="@drawable/circle_button_background"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

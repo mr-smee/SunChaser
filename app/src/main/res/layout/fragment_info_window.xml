@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="@android:color/transparent"
+              >
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@android:color/white"
+            >
+
+        <TextView
+                android:id="@+id/info_window_place_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                />
+
+        <ImageView
+            android:id="@+id/info_window_place_image"
+            android:layout_width="200dip"
+            android:layout_height="wrap_content"
+            />
+
+        <LinearLayout
+                android:id="@+id/info_window_weather"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

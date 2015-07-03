@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="content_authority">com.example.sunchaser.app</string>
+
+    <string name="app_name">SunChaser</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="preference_latitude_key">latitude</string>
+    <string name="preference_longitude_key">longitude</string>
+    <string name="preference_last_sync_time_key">last_sync_time</string>
+
+    <string name="location_detail_get_directions">Get directions</string>
+
+    <string name="sync_account_type">sunchaser.example.com</string>
+    <string name="general_unavailable">Unavailable</string>
+    <string name="location_detail_places_of_interest">Things to do</string>
+    <string name="location_detail_accommodation">Places to stay</string>
+
+    <string name="format_temperature"><xliff:g id="temp">%1.0f</xliff:g>\u00B0</string>
+    <string name="no_map_app_installed">No mapping app found</string>
+
+    <string name="today">Today</string>
+    <!-- Date label when displaying tomorrow's weather forecast [CHAR LIMIT=20] -->
+    <string name="tomorrow">Tomorrow</string>
+
+    <!-- Date format for displaying day of week and date (i.e. Mon Jun 1) [CHAR LIMIT=20] -->
+    <string name="format_full_friendly_date"><xliff:g id="day">%1$s</xliff:g>, <xliff:g id="date">%2$s</xliff:g></string>
+    <string name="location_detail_weather_attribution">openweathermap.org</string>
+    <string name="list_item_load_more">Load more</string>
+    <string name="place_list_show_all_on_map">Show all on a map</string>
+    <string name="place_of_interest_detail_rating">Rating</string>
+    <string name="place_of_interest_detail_price_level">Price level</string>
+    <string name="search_filter_prompt">The type of place you\'re looking for</string>
+    <string name="search_description_types">Place types</string>
+    <string name="search_description_radius">Search radius</string>
+    <string name="action_share">Share</string>
+    <string name="location_detail_wiki_attribution">Read more at wikipedia.org</string>
+    <string name="location_detail_wiki_title">Description</string>
+    <string name="location_detail_wiki_extract_hide">Hide</string>
+    <string name="location_detail_wiki_extract_show">Show</string>
+
+    <string name="title_activity_intro_screen">Loading</string>
+    <string name="intro_screen_loading_geolocations">Figuring out where we are…</string>
+    <string name="intro_screen_loading_wiki_articles">Reading about nearby places…</string>
+    <string name="intro_screen_loading_wiki_images">Taking photos…</string>
+    <string name="intro_screen_loading_weather">Looking for sunshine…</string>
+
+
+</resources>
