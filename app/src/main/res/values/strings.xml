@@ -19,6 +19,8 @@
     <string name="location_detail_places_of_interest">Things to do</string>
     <string name="location_detail_accommodation">Places to stay</string>
 
+    <string name="format_social_text">I\'ve just visited <xliff:g id="locationName">%1$s</xliff:g>, thanks to #SunChaserApp</string>
+
     <string name="format_temperature"><xliff:g id="temp">%1.0f</xliff:g>\u00B0</string>
     <string name="no_map_app_installed">No mapping app found</string>
 

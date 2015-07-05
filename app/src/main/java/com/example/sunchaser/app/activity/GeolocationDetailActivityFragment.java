@@ -177,12 +177,12 @@ public class GeolocationDetailActivityFragment extends Fragment implements Loade
 
     private Intent createSharePlaceDetailIntent() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        String contentString = getActivity().getString(R.string.format_social_text, locationName);
+
+        shareIntent.putExtra(Intent.EXTRA_TEXT, contentString);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         shareIntent.setType("text/plain");
 
-        String contentString = "I've just visited " + locationName + " thanks to #SunChaserApp"; // TODO: Make this less awful
-
-        shareIntent.putExtra(Intent.EXTRA_TEXT, contentString);
         return shareIntent;
     }
 
