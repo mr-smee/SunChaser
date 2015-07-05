@@ -13,6 +13,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -270,7 +271,7 @@ public class GeolocationDetailActivityFragment extends Fragment implements Loade
             return;
         }
         List<GeolocationModel> modelList = new ArrayList<>(locationModels);
-        // TODO Should only be one entry here
+
         GeolocationModel geolocationModel = modelList.get(0);
 
         locationName = geolocationModel.getLocationName();
