@@ -5,6 +5,9 @@ import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 /**
  * Created by smee on 07/06/15.
  */
@@ -31,5 +34,26 @@ public class WikiArticleEntry implements BaseColumns {
 
     public static Uri buildLocationUri(long id) {
         return ContentUris.withAppendedId(CONTENT_URI, id);
+    }
+
+
+    public static Collection<String> unpackImageFilenames(String packedImageFilenames) {
+        String[] imageNames = packedImageFilenames.split("\\|");
+        return Arrays.asList(imageNames);
+    }
+
+    public static String packImageFilenames(StringBuilder imageBuilder, Collection<String> imageFilenames) {
+        if (imageBuilder == null) {
+            imageBuilder = new StringBuilder();
+        }
+
+        for (String filename : imageFilenames) {
+            if (imageBuilder.length() != 0) {
+                imageBuilder.append('|');
+            }
+            imageBuilder.append(filename);
+        }
+
+        return imageBuilder.toString();
     }
 }

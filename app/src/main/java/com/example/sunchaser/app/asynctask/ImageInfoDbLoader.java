@@ -7,7 +7,10 @@ import android.support.v4.content.AsyncTaskLoader;
 import com.example.sunchaser.app.data.dbcontract.WikiImageEntry;
 import com.example.sunchaser.app.data.WikiImageModel;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -32,11 +35,11 @@ public class ImageInfoDbLoader extends AsyncTaskLoader<Set<WikiImageModel>> {
     private static final int WIKI_IMAGE_COLUMN_INDEX_URL        = 3;
     private static final int WIKI_IMAGE_COLUMN_INDEX_MIME_TYPE  = 4;
 
-    private final String[] imageNames;
+    private final List<String> imageNames;
 
-    public ImageInfoDbLoader(Context context, String[] imageNames) {
+    public ImageInfoDbLoader(Context context, Collection<String> imageNames) {
         super(context);
-        this.imageNames = imageNames;
+        this.imageNames = new ArrayList<>(imageNames);
     }
 
     @Override
@@ -44,7 +47,7 @@ public class ImageInfoDbLoader extends AsyncTaskLoader<Set<WikiImageModel>> {
         Set<WikiImageModel> results = new HashSet<>();
 
         StringBuilder whereClauseBuilder = new StringBuilder(WikiImageEntry.COLUMN_FILENAME + " IN (?");
-        for (int i = 0; i < imageNames.length - 1; i++) {
+        for (int i = 0; i < imageNames.size() - 1; i++) {
             whereClauseBuilder.append(",?");
         }
         whereClauseBuilder.append(")");
@@ -52,7 +55,7 @@ public class ImageInfoDbLoader extends AsyncTaskLoader<Set<WikiImageModel>> {
         Cursor cursor = getContext().getContentResolver().query(WikiImageEntry.CONTENT_URI,
                 WIKI_IMAGE_COLUMNS,
                 whereClauseBuilder.toString(),
-                imageNames,
+                imageNames.toArray(new String[imageNames.size()]),
                 null);
 
         if (!cursor.moveToFirst()) {

@@ -90,7 +90,6 @@ public class GeolocationClient extends SunChaserHttpRequestClient<List<Geolocati
     }
 
     @Override
-    //TODO: Change this to return a collection of location objects and move storage of them somewhere else
     protected List<GeolocationModel> processResponse(String jsonData) {
 
         ContentResolver contentResolver = context.getContentResolver();
@@ -137,7 +136,7 @@ public class GeolocationClient extends SunChaserHttpRequestClient<List<Geolocati
                     Log.d(LOG_TAG, "Wikipedia page name for " + name + ": " + wikipediaPageName);
                 }
 
-                GeolocationModel model = new GeolocationModel(id, new LatLng(latitude, longitude), name, wikipediaPageName, "", new String[0]);
+                GeolocationModel model = new GeolocationModel(id, new LatLng(latitude, longitude), name, wikipediaPageName, "", Collections.EMPTY_LIST);
                 results.add(model);
 
                 ContentValues values = new ContentValues();
@@ -160,10 +159,6 @@ public class GeolocationClient extends SunChaserHttpRequestClient<List<Geolocati
         //  If we've got any new results, clear any old data before inserting the new stuff
         int inserted = 0;
         if (cVVector.size() > 0) {
-            // TODO: Only delete stuff in sync adapter?
-//            if (!isLocationDataStillValid(centre)) {
-//                contentResolver.delete(GeolocationEntry.CONTENT_URI, null, null);
-//            }
             ContentValues[] valuesToInsert = cVVector.toArray(new ContentValues[cVVector.size()]);
             inserted = contentResolver.bulkInsert(GeolocationEntry.CONTENT_URI, valuesToInsert);
         }

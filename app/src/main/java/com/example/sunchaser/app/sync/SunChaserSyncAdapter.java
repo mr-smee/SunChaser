@@ -22,6 +22,7 @@ import android.util.Log;
 
 import com.example.sunchaser.R;
 import com.example.sunchaser.app.data.GeolocationModel;
+import com.example.sunchaser.app.data.WikiArticle;
 import com.example.sunchaser.app.data.dbcontract.GeolocationEntry;
 import com.example.sunchaser.app.data.dbcontract.PlaceOfInterestEntry;
 import com.example.sunchaser.app.data.dbcontract.PlaceOfInterestSearchEntry;
@@ -265,11 +266,7 @@ public class SunChaserSyncAdapter extends AbstractThreadedSyncAdapter {
 
         do {
             String packedImageNames = wikiArticleCursor.getString(WIKI_COLUMN_INDEX_IMAGES);
-            // TODO: Move this magic somewhere else (near code from client that packs these into DB)
-            String[] imageNames = packedImageNames.split("\\|");
-            for (String imageName : imageNames) {
-                imageFileNames.add(imageName);
-            }
+            imageFileNames.addAll(WikiArticleEntry.unpackImageFilenames(packedImageNames));
         } while (wikiArticleCursor.moveToNext());
         
         new WikipediaImageInfoClient(getContext(), imageFileNames).makeRequest();

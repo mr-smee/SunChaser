@@ -106,7 +106,12 @@ public class GeolocationDataLoader extends AsyncTaskLoader<Collection<Geolocatio
                 String wikiTitle = locationCursor.getString(BASE_COLUMN_INDEX_WIKI_TITLE);
                 String wikiExtract = locationCursor.getString(BASE_COLUMN_INDEX_WIKI_EXTRACT);
                 String packedWikiImageNames = locationCursor.getString(BASE_COLUMN_INDEX_WIKI_IMAGES);
-                String[] wikiImageNames = (packedWikiImageNames == null) ? new String[0] : packedWikiImageNames.split("\\|");
+                Collection<String> wikiImageNames;
+                if (packedWikiImageNames == null) {
+                    wikiImageNames = Collections.emptySet();
+                } else {
+                    wikiImageNames = WikiArticleEntry.unpackImageFilenames(packedWikiImageNames);
+                }
 
                 existingModel = new GeolocationModel(locationId, location, locationName, wikiTitle, wikiExtract, wikiImageNames);
                 results.put(locationId, existingModel);

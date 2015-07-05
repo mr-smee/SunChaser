@@ -77,7 +77,7 @@ public class CustomGeolocationLoader extends AsyncTaskLoader<Collection<Geolocat
 
         for (GeolocationModel model : results) {
             Set<String> imageUrls = new HashSet<>();
-            Collections.addAll(imageUrls, model.getImageNames());
+            imageUrls.addAll(model.getImageNames());
             Set<WikiImageModel> images = new WikipediaImageInfoClient(getContext(), imageUrls).makeRequest();
             model.setImages(images);
 

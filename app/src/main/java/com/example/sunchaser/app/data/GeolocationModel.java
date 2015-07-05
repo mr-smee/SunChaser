@@ -3,6 +3,7 @@ package com.example.sunchaser.app.data;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,11 +18,11 @@ public class GeolocationModel {
     private final String locationName;
     private final String extractTitle;
     private final String extract;
-    private String[] imageNames;
+    private Collection<String> imageNames;
     private final List<WeatherModel> weatherForecast = new ArrayList<WeatherModel>();
     private final Set<WikiImageModel> images = new HashSet<>();
 
-    public GeolocationModel(int locationId, LatLng location, String locationName, String extractTitle, String extract, String[] imageNames) {
+    public GeolocationModel(int locationId, LatLng location, String locationName, String extractTitle, String extract, Collection<String> imageNames) {
         this.locationId = locationId;
         this.location = location;
         this.locationName = locationName;
@@ -42,11 +43,11 @@ public class GeolocationModel {
         return locationName;
     }
 
-    public String[] getImageNames() {
+    public Collection<String> getImageNames() {
         return imageNames;
     }
 
-    public void setImageNames(String[] imageNames) {
+    public void setImageNames(Collection<String> imageNames) {
         this.imageNames = imageNames;
     }
 

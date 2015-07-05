@@ -14,6 +14,8 @@ import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -156,7 +158,7 @@ public class WikipediaArticleClient extends SunChaserHttpRequestClient<Map<Strin
 
                 String imageNames = contentValues.getAsString(WikiArticleEntry.COLUMN_IMAGES);
                 StringBuilder imageBuilder = (imageNames == null) ? new StringBuilder() : new StringBuilder(imageNames);
-
+                List<String> imageFilenames = new ArrayList<>(imagesArray.length());
                 for (int i = 0; i < imagesArray.length(); i++) {
                     JSONObject imageObject = imagesArray.getJSONObject(i);
                     String imageTitle = imageObject.getString("title");
@@ -164,13 +166,11 @@ public class WikipediaArticleClient extends SunChaserHttpRequestClient<Map<Strin
                     if (imageTitle.endsWith(".svg")) {
                         continue;
                     }
-                    if (imageBuilder.length() != 0) {
-                        imageBuilder.append('|');
-                    }
-                    imageBuilder.append(imageTitle);
+                    imageFilenames.add(imageTitle);
                 }
 
-                contentValues.put(WikiArticleEntry.COLUMN_IMAGES, imageBuilder.toString());
+
+                contentValues.put(WikiArticleEntry.COLUMN_IMAGES, WikiArticleEntry.packImageFilenames(imageBuilder, imageFilenames));
             }
         }
 
@@ -199,16 +199,19 @@ public class WikipediaArticleClient extends SunChaserHttpRequestClient<Map<Strin
 
         ContentValues[] valuesToStoreArray = new ContentValues[articlesToStore.size()];
         articlesToStore.values().toArray(valuesToStoreArray);
+
         int recordsInserted = context.getContentResolver().bulkInsert(WikiArticleEntry.CONTENT_URI, valuesToStoreArray);
         Log.d(LOG_TAG, "Inserted " + recordsInserted + " wiki article entries");
-// TODO: Tidy this up a lot!
+
         Map<String, WikiArticle> results = new HashMap<>(valuesToStoreArray.length);
         for (ContentValues cv : valuesToStoreArray) {
-            results.put(cv.getAsString(WikiArticleEntry.COLUMN_TITLE),
-                    new WikiArticle(cv.getAsInteger(WikiArticleEntry.COLUMN_ARTICLE_ID),
-                            cv.getAsString(WikiArticleEntry.COLUMN_TITLE),
-                            cv.getAsString(WikiArticleEntry.COLUMN_EXTRACT),
-                            cv.getAsString(WikiArticleEntry.COLUMN_IMAGES).split("\\|")));
+            int id = cv.getAsInteger(WikiArticleEntry.COLUMN_ARTICLE_ID);
+            String title = cv.getAsString(WikiArticleEntry.COLUMN_TITLE);
+            String extract = cv.getAsString(WikiArticleEntry.COLUMN_EXTRACT);
+            String packedImageFilenames = cv.getAsString(WikiArticleEntry.COLUMN_IMAGES);
+            Collection<String> imageFilenames = WikiArticleEntry.unpackImageFilenames(packedImageFilenames);
+
+            results.put(title, new WikiArticle(id, title, extract, imageFilenames));
         }
 
         return results;
